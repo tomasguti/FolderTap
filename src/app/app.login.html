@@ -1,4 +1,8 @@
 <form action="/action_page.php">
-  <br>
-  <input type="text" name="name" [(ngModel)]='currentName' (input)="nameChange()">
+    <br>
+    Enter your name:
+    <br>
+    <input type="text" name="name" [(ngModel)]='currentName' (input)="nameChange()">
+    <br>
+    <button (click)="onClick()">Enter</button>
 </form>

@@ -1,14 +1,51 @@
+@font-face {
+    font-family: 'Arial Rounded MT Bold';
+    src: url('/assets/fonts/ARLRDBD.TTF')  format('truetype');
+    font-weight: "bold";
+}
+
 body {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    text-align: center
+    font-family: 'Arial Rounded MT Bold';
+    text-align: center;
+    user-select: none;
 }
 
 h1 {
-    color: #800080;
+    color: rebeccapurple;
 }
 
 h3 {
-    color: #FFFFFF;
+    color: darkred;
+    font-size: 20px;
+}
+
+button {
+    background-color: purple; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Arial Rounded MT Bold';
+    border-radius: 25px;
+    box-shadow: 2px;
+}
+
+img:active {
+    opacity: 0.5;
+}
+
+input{
+    width: auto;
+    max-width: 70%;
+    margin: 10px;
+    font-family: 'Arial Rounded MT Bold';
+    font-size: 25px;
+    border-radius: 5px;
+    text-align: center;
+    border: 5px;
 }
 
 img.centered {
@@ -17,6 +54,9 @@ img.centered {
     margin-right: auto }
 
 div.centered {
-    margin-left: 40%;
-    margin-right: 40%;
+    padding: 10px;
+    border-radius: 25px 25px 0px 0px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10%;
     background: linear-gradient(rebeccapurple, white); }

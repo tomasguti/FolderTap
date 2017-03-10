@@ -1,0 +1,12 @@
+<table style="width:100%">
+    <tr>
+        <th><h3>Position</h3></th>
+        <th><h3>Score</h3></th>
+        <th><h3>Name</h3></th> 
+    </tr>
+    <tr *ngFor="let player of players; let i = index" >
+        <th>{{ i+1 }}</th>
+        <th>{{ player.score }}</th>
+        <th>{{ player.name }}</th> 
+    </tr>
+</table>

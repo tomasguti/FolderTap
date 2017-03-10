@@ -1,11 +1,11 @@
 <body>
   <div>
-      <h1>Folder IT TAP!</h1>
+      <h1>TAP! TAP! TAP!</h1>
       <img class="centered" src="./assets/signbg_logo_96dpi.jpg" (click)="addPoint('name')">
       <p>
       <div class="centered">
-      <login (onNameChange)="onNameChanged($event)"></login>
-      <highscores></highscores>
+        <login [hidden]="hideLogin" (onNameChange)="onNameChanged($event)" (onEnter)="onEntered($event)"></login>
+        <highscores [hidden]="hideHighscore"></highscores>
       </div>
   </div>
 </body>

@@ -1,50 +1,49 @@
 import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Player } from './app.player'
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class PlayersService {
-  players: Array<Player>;
-  playersMap: Map<String, Player>;
-  contructor(){
-      this.players = new Array();
-      this.playersMap = new Map();
-      this.addPlayer("Tomas");
-      this.addPlayer("Juan");
-      this.addPlayer("José");
-  }
-
-  sortPlayers(){
-    this.players.sort((a:Player, b:Player) => {
-      if(a.highscore > b.highscore){
-          return -1;
-      }else if(a.highscore < b.highscore){
-          return 1;
-      }else{
-          return 0;
-      }
-    })
-  }
-
-  addPlayer(name: string){
-    let player = new Player(name);
-    this.players.push(player);
-    this.playersMap.set(player.name, player);
-  }
-
-  addPoint(name: string){
-    if(this.playersMap.has(name)){
-        this.playersMap.get(name).highscore++;
-    }else{
-        this.addPlayer(name);
+    // Resolve HTTP using the constructor
+    constructor (private http: Http) {
+        console.log(http);
+        this.http = http;
     }
-  }
-  
-}
+    // private instance variable to hold base url
+    private namesUrl = 'http://172.10.0.85:4201/names';
 
-class Player{
-    name: string;
-    highscore: number;
-    constructor(name: string){
-      this.name = name;
-      this.highscore = 0;
+    public addPoint(name: String): Observable<Player[]> {
+        return this.http.get(this.namesUrl+"/"+name)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    public getAll(): Observable<Player[]> {
+        return this.http.get(this.namesUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    private extractData(res: Response) {
+        let body = res.json();
+        return body || {};
+    }
+
+    private handleError (error: Response | any) {
+        // In a real world app, we might use a remote logging infrastructure
+        let errMsg: string;
+        if (error instanceof Response) {
+            const body = error.json() || '';
+            const err = body.error || JSON.stringify(body);
+            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+        } else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error(errMsg);
+        return Observable.throw(errMsg);
     }
 }
